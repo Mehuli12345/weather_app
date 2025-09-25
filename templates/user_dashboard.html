@@ -23,7 +23,7 @@
             padding: 20px;
             border-radius: 10px;
             width: 80%;
-            max-width: 500px;
+            max-width: 600px;
             position: relative;
             text-align: center;
         }
@@ -140,12 +140,8 @@
 
 <!-- Info Modal -->
 <div id="infoModal" class="modal">
-    <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <h2>ℹ️ About PM Accelerator</h2>
-        <p>Welcome to your AI/ML Weather App Dashboard! 🌤️ This app was built as part of the PM Accelerator AI Engineer Internship. 
-        Here, you can check the weather, view 5-day forecasts, and track your search history. 🚀</p>
-        <p>Learn more about PM Accelerator: <a href="https://www.linkedin.com/company/product-manager-accelerator/" target="_blank">LinkedIn</a></p>
+    <div class="modal-content" id="modalContent">
+        <!-- Info.html will be loaded dynamically here -->
     </div>
 </div>
 
@@ -171,11 +167,19 @@ function showError(err) {
 // Modal functionality
 const infoBtn = document.getElementById("infoBtn");
 const infoModal = document.getElementById("infoModal");
-const closeModal = document.getElementById("closeModal");
+const modalContent = document.getElementById("modalContent");
 
-infoBtn.onclick = function() { infoModal.style.display = "block"; }
-closeModal.onclick = function() { infoModal.style.display = "none"; }
-window.onclick = function(event) { if(event.target == infoModal) { infoModal.style.display = "none"; } }
+infoBtn.onclick = async function() {
+    const response = await fetch('/info');
+    const html = await response.text();
+    modalContent.innerHTML = `<span class="close" id="closeModal">&times;</span>` + html;
+    document.getElementById("closeModal").onclick = function() { infoModal.style.display = "none"; }
+    infoModal.style.display = "block";
+}
+
+window.onclick = function(event) {
+    if(event.target == infoModal) { infoModal.style.display = "none"; }
+}
 </script>
 </body>
 </html>
