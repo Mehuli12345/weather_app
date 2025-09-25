@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Edit Admin</title><link rel="stylesheet" href="/static/style.css"></head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+<nav class="navbar"><div class="nav-left"><a href="/admin_dashboard" class="logo">👑 Admin Panel</a></div><div class="nav-right"><a href="/logout" class="nav-link">Logout</a></div></nav>
+<div class="dashboard-container">
+    <h1 class="page-title">Edit Admin Profile</h1>
+    <div class="form-card">
+        <form method="post" action="/admin/edit_profile">
+            <input type="text" name="username" value="{{ user.username }}" required>
+            <input type="email" name="email" value="{{ user.email }}" required>
+            <input type="password" name="password" placeholder="New password (leave blank to keep)">
+            <button type="submit" class="btn-login">Save</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

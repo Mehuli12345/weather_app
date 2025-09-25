@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Admin - Users</title><link rel="stylesheet" href="/static/style.css"></head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+<nav class="navbar"><div class="nav-left"><a href="/admin_dashboard" class="logo">👑 Admin Panel</a></div><div class="nav-center"><a href="/admin_dashboard" class="nav-link">Home</a><a href="/admin/users" class="nav-link">Users</a><a href="/admin/weather" class="nav-link">Weather Logs</a></div><div class="nav-right"><a href="/logout" class="nav-link">Logout</a></div></nav>
+
+<div class="dashboard-container">
+    <h1 class="page-title">Registered Users</h1>
+    <table class="styled-table">
+        <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Admin</th></tr></thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% if user.is_admin %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="/admin_dashboard">Back</a></p>
+</div>
+</body>
+</html>

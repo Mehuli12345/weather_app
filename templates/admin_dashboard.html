@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Admin Dashboard</title><link rel="stylesheet" href="/static/style.css"></head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+<nav class="navbar">
+    <div class="nav-left"><a href="/admin_dashboard" class="logo">👑 Admin Panel</a></div>
+    <div class="nav-center">
+        <a href="/admin_dashboard" class="nav-link">Home</a>
+        <a href="/admin/users" class="nav-link">Users</a>
+        <a href="/admin/weather" class="nav-link">Weather Logs</a>
+        <a href="/admin/edit_profile" class="nav-link">Edit Profile</a>
+    </div>
+    <div class="nav-right"><a href="/logout" class="nav-link">Logout</a></div>
+</nav>
+
+<div class="dashboard-container">
+    <h1 class="page-title">Admin Overview</h1>
+    <div style="display:flex; gap:18px; justify-content:center; margin-bottom:18px;">
+        <div class="data-card" style="text-align:center; width:180px;">
+            <h3>Total Users</h3>
+            <p style="font-size:1.6rem;">{{ users_count }}</p>
+        </div>
+        <div class="data-card" style="text-align:center; width:180px;">
+            <h3>Total Weather Entries</h3>
+            <p style="font-size:1.6rem;">{{ weather_count }}</p>
+        </div>
+    </div>
+
+    <h3>Recent Users</h3>
+    <table class="styled-table">
+        <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Admin</th></tr></thead>
+        <tbody>
+            {% for u in recent_users %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.username }}</td>
+                <td>{{ u.email }}</td>
+                <td>{% if u.is_admin %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

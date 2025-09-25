@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+    <div class="dashboard-container">
+        <h1>User Profile</h1>
+        <form method="post" action="/update_profile">
+            <label>Username:</label>
+            <input type="text" name="username" value="{{ user.username }}" required>
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ user.email }}" required>
+            <label>New Password (leave blank to keep current):</label>
+            <input type="password" name="password">
+            <button type="submit">Update</button>
+        </form>
+        <br>
+        <form method="post" action="/delete_account">
+            <button type="submit" class="danger">Delete Account</button>
+        </form>
+        <br>
+        <a href="/user_dashboard">⬅ Back to Dashboard</a>
+    </div>
+</body>
+</html>

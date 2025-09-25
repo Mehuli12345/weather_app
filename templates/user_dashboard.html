@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+<nav class="navbar">
+    <div class="nav-left"><a href="/user_dashboard" class="logo">☁️ Weatherly</a></div>
+    <div class="nav-center">
+        <a href="/user_dashboard" class="nav-link">Home</a>
+        <a href="/edit_profile" class="nav-link">Edit Profile</a>
+        <a href="/history" class="nav-link">History</a>
+    </div>
+    <div class="nav-right"><a href="/logout" class="nav-link">Logout</a></div>
+</nav>
+
+<div class="dashboard-container">
+    <h1 class="page-title">🌤️ Welcome {{ user.username }}</h1>
+
+    <!-- Weather search form -->
+    <div class="form-card user-card">
+        <form method="post" action="/get_weather">
+            <input type="text" name="city" placeholder="City or postal code" required>
+            <button type="submit" class="btn-user">Get Weather</button>
+        </form>
+        <button onclick="getLocation()" class="btn-user" style="margin-top:10px;">Use My Location</button>
+        {% if error %}<p class="error">{{ error }}</p>{% endif %}
+    </div>
+
+    <!-- Current weather -->
+    {% if weather %}
+    <div class="data-card">
+        <div style="display:flex; align-items:center; gap:20px;">
+            <img src="https://openweathermap.org/img/wn/{{ weather.weather[0].icon }}@2x.png" alt="icon" style="width:96px;height:96px;">
+            <div>
+                <h2>{{ weather.name }}, {{ weather.sys.country }} — <span style="font-size:1.6rem">{{ weather.main.temp }}°C</span></h2>
+                <p style="text-transform:capitalize;">{{ weather.weather[0].description }}</p>
+                <p>Wind: {{ weather.wind.speed }} m/s | Humidity: {{ weather.main.humidity }}%</p>
+                <p>Min: {{ weather.main.temp_min }}°C | Max: {{ weather.main.temp_max }}°C</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5-day forecast -->
+    {% if forecast_days %}
+    <div class="data-card">
+        <h3>5-day (approx) Forecast</h3>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+            {% for item in forecast_days %}
+            <div style="background:rgba(0,0,0,0.04); padding:12px; border-radius:10px; width:130px; text-align:center;">
+                <p style="font-weight:600;">{{ item.dt_txt.split(' ')[0] }}</p>
+                <img src="https://openweathermap.org/img/wn/{{ item.icon }}@2x.png" style="width:64px;height:64px;">
+                <p>{{ item.temp }}°C</p>
+                <p style="text-transform:capitalize; font-size:0.9rem;">{{ item.desc }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+    <!-- Weather history -->
+    <div class="data-card">
+        <h3>🌈 Your Weather History</h3>
+        {% if history %}
+            <table class="styled-table">
+                <thead>
+                    <tr><th>When</th><th>City</th><th>Temp</th><th>Description</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    {% for entry in history %}
+                    <tr>
+                        <td>{{ entry.timestamp.strftime("%Y-%m-%d %H:%M") }}</td>
+                        <td>{{ entry.city }}</td>
+                        <td>{{ entry.temperature }}°C</td>
+                        <td>{{ entry.description }}</td>
+                        <td>
+                            <a href="/update_weather/{{ entry.id }}">Edit</a> |
+                            <a href="/delete_weather/{{ entry.id }}" onclick="return confirm('Are you sure?');">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No history yet — search a city to add entries.</p>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else { alert("Geolocation not supported."); }
+}
+
+function showPosition(position) {
+    fetch(`/weather/coords?lat=${position.coords.latitude}&lon=${position.coords.longitude}`)
+    .then(resp => resp.json())
+    .then(data => {
+        alert(`Weather in your location: ${data.city} - ${data.temperature}°C, ${data.description}`);
+        // Optionally reload page or call endpoint to save entry
+    });
+}
+
+function showError(err) {
+    alert("Error: " + err.message);
+}
+</script>
+</body>
+</html>

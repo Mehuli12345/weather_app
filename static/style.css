@@ -1,0 +1,90 @@
+/* ---------- GLOBAL ---------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #333;
+}
+
+a { text-decoration: none; color: #0066ff; transition: 0.3s; }
+a:hover { color: #0044aa; }
+
+/* Navbar */
+.navbar {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 20px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+.logo { font-weight:700; font-size:1.2rem; color:#2C3E50; margin-left:8px; }
+.nav-center { display:flex; gap:14px; }
+.nav-link { color:#2C3E50; font-weight:600; }
+
+/* Forms and cards */
+.form-card, .data-card {
+    width: 90%;
+    max-width: 860px;
+    margin: 18px auto;
+    background: rgba(255,255,255,0.85);
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+.register-card { border-left: 6px solid #E67E22; }
+.login-card { border-left: 6px solid #8E44AD; }
+.user-card { border-left: 6px solid #16A085; }
+
+.page-title { text-align:center; margin:6px 0 14px 0; font-size:1.6rem; }
+
+/* Buttons / inputs */
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+button {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 700;
+}
+.btn-login { background: #8E44AD; }
+.btn-register { background: #E67E22; }
+.btn-user { background: #16A085; }
+button:hover { opacity: 0.92; }
+
+/* Dashboard container */
+.dashboard-container {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 12px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 14px;
+}
+
+/* Table */
+.styled-table { width:100%; border-collapse:collapse; margin-top:10px; }
+.styled-table thead tr { background:#34495E; color:#fff; }
+.styled-table th, .styled-table td { padding:12px; text-align:left; }
+.styled-table tbody tr:nth-child(even) { background:#f3f3f3; }
+
+/* Messages */
+.error { color:#E74C3C; font-weight:700; text-align:center; }
+.success { color:#27AE60; font-weight:700; text-align:center; }
+
+/* small screens */
+@media (max-width:768px) {
+    .nav-center{ display:none; }
+    .form-card{ width:92%; margin-top:30px; }
+}

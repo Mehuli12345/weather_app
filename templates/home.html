@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Portal</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="home-body" style="background-image: url('/static/cloud_bg.jpg');">
+    <div class="home-container">
+        <h1 class="home-title">🌤️ Live Weather Search</h1>
+        <form id="publicWeatherForm" class="home-search">
+            <input type="text" name="city" id="publicCity" placeholder="Enter city name..." required>
+            <button type="submit">Get Weather</button>
+        </form>
+        <div id="publicWeatherResult" class="weather-result"></div>
+
+        <div class="home-links">
+            <a href="/login">🔑 Login</a>
+            <a href="/register">📝 Register</a>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

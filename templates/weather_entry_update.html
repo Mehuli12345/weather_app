@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Weather Entry</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+<nav class="navbar">
+    <div class="nav-left"><a href="{{ '/admin_dashboard' if admin else '/user_dashboard' }}" class="logo">☁️ Weatherly</a></div>
+    <div class="nav-center">
+        <a href="{{ '/user_dashboard' if not admin else '/admin_dashboard' }}" class="nav-link">Home</a>
+        <a href="/edit_profile" class="nav-link">Edit Profile</a>
+        <a href="/history" class="nav-link">History</a>
+    </div>
+    <div class="nav-right"><a href="/logout" class="nav-link">Logout</a></div>
+</nav>
+
+<div class="dashboard-container">
+    <h1 class="page-title">✏️ Update Weather Entry</h1>
+
+    <div class="form-card user-card">
+        <form method="post" action="{{ '/admin/update_weather/' + str(entry.id) if admin else '/update_weather/' + str(entry.id) }}">
+            <label>City:</label>
+            <input type="text" name="city" value="{{ entry.city }}" required><br>
+
+            <label>Temperature:</label>
+            <input type="number" step="0.1" name="temperature" value="{{ entry.temperature }}" required><br>
+
+            <label>Description:</label>
+            <input type="text" name="description" value="{{ entry.description }}" required><br>
+
+            <label>Timestamp (YYYY-MM-DD HH:MM:SS):</label>
+            <input type="text" name="timestamp" value="{{ entry.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}" required><br>
+
+            <button type="submit">Update Entry</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

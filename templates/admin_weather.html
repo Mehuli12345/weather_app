@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Admin - Weather Logs</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body style="background-image: url('/static/cloud_bg.jpg');">
+
+<nav class="navbar">
+    <div class="nav-left">
+        <a href="/admin_dashboard" class="logo">👑 Admin Panel</a>
+    </div>
+    <div class="nav-center">
+        <a href="/admin_dashboard" class="nav-link">Home</a>
+        <a href="/admin/users" class="nav-link">Users</a>
+        <a href="/admin/weather" class="nav-link active">Weather Logs</a>
+    </div>
+    <div class="nav-right">
+        <a href="/logout" class="nav-link">Logout</a>
+    </div>
+</nav>
+
+<div class="dashboard-container">
+    <h1 class="page-title">All Weather Entries</h1>
+    
+    <!-- Optional: Add Export Buttons -->
+    <div class="export-buttons">
+        <a href="/export/csv" class="btn">Export CSV</a>
+        <a href="/export/json" class="btn">Export JSON</a>
+    </div>
+
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>When</th>
+                <th>User</th>
+                <th>City</th>
+                <th>Temperature</th>
+                <th>Description</th>
+                <th>Humidity</th>
+                <th>Wind Speed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in entries %}
+            <tr>
+                <td>{{ e.timestamp.strftime("%Y-%m-%d %H:%M") }}</td>
+                <td>{{ e.user.username if e.user else 'N/A' }}</td>
+                <td>{{ e.city }}</td>
+                <td>{{ e.temperature }}°C</td>
+                <td>{{ e.description }}</td>
+                <td>{{ e.humidity }}%</td>
+                <td>{{ e.wind_speed }} km/h</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p><a href="/admin_dashboard" class="btn">Back to Dashboard</a></p>
+</div>
+
+</body>
+</html>
