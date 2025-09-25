@@ -289,3 +289,6 @@ def logout(request: Request):
     request.session.clear()
     return RedirectResponse(url="/login", status_code=302)
 
+@app.get("/info", response_class=HTMLResponse)
+def info_page(request: Request):
+    return templates.TemplateResponse("info.html", {"request": request})
