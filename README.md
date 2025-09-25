@@ -1,172 +1,104 @@
-Weather App
+🌤 Weather App — Your Real-Time Weather Companion
 
-A modern, full-featured weather web application built with FastAPI, SQLAlchemy, and OpenWeather APIs, featuring user and admin dashboards, history tracking, and real-time weather forecasts.
+Welcome to Weather App, your sleek and interactive solution for tracking weather around the globe! Built with 💖 using FastAPI, SQLAlchemy, and Jinja2, this project offers a full-featured user and admin dashboard, real-time weather updates, and a 5-day forecast, making it easy to stay ahead of the weather 🌞🌧❄️.
 
-🔹 Features
+🚀 Features
 
-User Authentication & Authorization
+✨ User Authentication: Secure registration, login, and session management 🔐
+🌆 User Dashboard: Search for weather, view 5-day forecast, and track history 📜
+👑 Admin Dashboard: Manage users and weather records with full CRUD support 🛠️
+🌡 Weather API Integration: Powered by OpenWeatherMap API for accurate data
+🗓 History Tracking: Keep a record of all weather searches with timestamps ⏰
+✨ Beautiful Templates: Clean and responsive design with Jinja2 ✨
 
-Secure registration and login with hashed passwords.
+🧠 Tech Stack
+Tech	Description
+🐍 Python	Programming language
+⚡ FastAPI	Modern Python web framework
+🧱 SQLAlchemy	ORM for database interactions
+🌐 Jinja2	HTML templating
+🗄 SQLite	Database storage
+🌦 OpenWeatherMap API	Weather & forecast data
+🔑 Starlette SessionMiddleware	Session-based authentication
+📁 Project Structure
+weather_app/
+│
+├── main.py                  # FastAPI app and routes
+├── database.py              # SQLAlchemy models and DB setup
+├── auth.py                  # Password hashing & verification
+├── weather_api.py           # Weather API functions
+├── templates/               # Jinja2 HTML templates
+├── static/                  # CSS, JS, images
+└── requirements.txt         # Dependencies
 
-Admin user with elevated privileges.
+🔧 Setup Instructions
 
-Session-based authentication using SessionMiddleware.
-
-User Dashboard
-
-Search current weather by city.
-
-View 5-day forecast.
-
-Track and manage your weather search history.
-
-Edit profile with optional password update.
-
-Admin Dashboard
-
-Manage all users and weather records.
-
-Edit or delete weather entries.
-
-View recent users and recent weather searches.
-
-Admin profile management.
-
-Weather API Integration
-
-Real-time weather data using OpenWeatherMap API.
-
-Temperature, description, humidity, and wind speed.
-
-5-day forecast in 8-hour intervals.
-
-Database Management
-
-SQLAlchemy ORM for seamless database interactions.
-
-SQLite database for easy local setup.
-
-Auto-creates tables on startup.
-
-Tracks user-specific weather searches with timestamps.
-
-User-Friendly Interface
-
-Beautiful HTML templates with Jinja2.
-
-Clean, responsive design for dashboards and forms.
-
-🔹 Technologies Used
-
-Backend: FastAPI, Python 3.10+
-
-Database: SQLAlchemy, SQLite
-
-Frontend: Jinja2 Templates, HTML/CSS
-
-APIs: OpenWeatherMap API
-
-Authentication: Password hashing, session middleware
-
-Others: Starlette, datetime, Form handling
-
-🔹 Installation & Setup
-
-Clone the repository:
+Clone the repository
 
 git clone git@github.com:Mehuli12345/weather_app.git
 cd weather_app
 
 
-Create a virtual environment:
+Create a virtual environment
 
 python -m venv venv
-source venv/Scripts/activate  # Windows
+source venv/Scripts/activate   # Windows
 # or
-source venv/bin/activate      # Linux/Mac
+source venv/bin/activate       # Linux/Mac
 
 
-Install dependencies:
+Install dependencies
 
 pip install -r requirements.txt
 
 
-Set up the database & admin user:
+Run the app
 
-Tables are auto-created on startup.
+uvicorn main:app --reload
 
-Default admin credentials:
+
+Open in your browser
+
+http://127.0.0.1:8000
+
+
+Default admin account:
 
 Email: admin@gmail.com
 
 Password: 123
 
-Run the app:
+📬 API Endpoints Overview
+Method	Endpoint	Description
+GET	/	Redirects to login
+GET	/register	Registration page
+POST	/register	Register a new user
+GET	/login	Login page
+POST	/login	Authenticate user
+GET	/user_dashboard	User weather dashboard
+POST	/get_weather	Get weather & forecast
+GET	/history	View search history
+GET	/admin_dashboard	Admin dashboard
+GET	/admin/users	Manage users
+GET	/admin/weather	Manage weather entries
+✅ Future Improvements
 
-uvicorn main:app --reload
+🌍 Dark mode for dashboards
+📱 Fully mobile-responsive UI
+🧑‍🤝‍🧑 Role-based authentication enhancements
+💳 Online API key management and notifications
+📊 Interactive weather charts & analytics
 
+💙 Contributing
 
-Access the app in your browser:
+Pull requests are welcome! For major changes, please open an issue to discuss before submitting.
 
-http://127.0.0.1:8000
+💌 Acknowledgements
 
-🔹 Screenshots
+FastAPI & SQLAlchemy Docs
 
-(Add your own screenshots here for login page, user dashboard, admin dashboard, weather search results, etc.)
+OpenWeatherMap API for weather data
 
-🔹 Usage
+Jinja2 & Starlette for templates and session management
 
-Register as a new user (except admin@gmail.com which is reserved).
-
-Log in and search for weather in any city.
-
-View your weather history and forecast.
-
-Admins can view all users, weather records, and manage entries.
-
-🔹 Project Structure
-weather_app/
-│
-├─ main.py                 # FastAPI routes and app logic
-├─ database.py             # SQLAlchemy models and DB setup
-├─ auth.py                 # Password hashing and verification
-├─ weather_api.py          # API functions for weather and forecast
-├─ templates/              # Jinja2 HTML templates
-├─ static/                 # CSS, JS, images
-└─ requirements.txt        # Python dependencies
-
-🔹 Future Enhancements
-
-Mobile-friendly responsive design.
-
-Dark mode toggle for dashboards.
-
-User profile avatar support.
-
-Deployment to cloud (Heroku / AWS / GCP).
-
-Support for multiple weather APIs for redundancy.
-
-🔹 Contributing
-
-Fork the repo
-
-Create a new branch: git checkout -b feature-name
-
-Commit your changes: git commit -m "Add feature"
-
-Push to branch: git push origin feature-name
-
-Open a pull request
-
-🔹 License
-
-This project is MIT licensed.
-
-🔹 Contact
-
-Developer: Mehuli Lahiri
-
-Email: mehulilahiri84@gmail.com
-
-GitHub: Mehuli12345
+Freepik / Unsplash for placeholder images
